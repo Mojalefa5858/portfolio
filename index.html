@@ -718,6 +718,7 @@
 
     <!-- EmailJS SDK -->
 <!-- EmailJS SDK -->
+<!-- EmailJS SDK -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
@@ -815,7 +816,7 @@
                         }
                     });
 
-                    // Stop observing after animation runs once
+                    // Run only once
                     skillsObserver.unobserve(skillsSection);
                 }
             });
@@ -839,20 +840,24 @@
                 formStatus.style.color = "#a78bfa";
             }
 
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(() => {
+            emailjs.sendForm('service_8p0tibm', 'template_keovora', this)
+                .then((response) => {
+                    console.log("SUCCESS!", response.status, response.text);
+
                     if (formStatus) {
                         formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
                         formStatus.style.color = "#a78bfa";
                     }
+
                     this.reset();
                 })
                 .catch((error) => {
+                    console.error("EmailJS error:", error);
+
                     if (formStatus) {
                         formStatus.textContent = "Oops! Something went wrong. Please try again.";
                         formStatus.style.color = "#ec4899";
                     }
-                    console.error('EmailJS error:', error);
                 });
         });
     }
